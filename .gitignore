@@ -1,5 +1,6 @@
 .idea
 .pypirc
 
+build
 dist
 pocketbase_pyclient.egg-info
