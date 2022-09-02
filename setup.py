@@ -4,8 +4,8 @@ with open("README.md", "r", encoding='utf8') as f:
     description = f.read()
 
 setuptools.setup(
-    name="pocketbase-pyclient",
-    version="0.0.1",
+    name="pocketbase_pyclient",
+    version="0.0.7",
     author="kirovj",
     author_email="j-wyt@qq.com",
     keywords=["pocketbase", "client"],
