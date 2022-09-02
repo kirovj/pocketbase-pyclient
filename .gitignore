@@ -1,2 +1,5 @@
 .idea
 .pypirc
+
+dist
+pocketbase_pyclient.egg-info
