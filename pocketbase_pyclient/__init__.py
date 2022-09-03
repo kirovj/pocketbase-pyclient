@@ -1,3 +1,3 @@
-from pocketbase import PocketBase
+from .pocketbase import PocketBase
 
 __all__ = ['PocketBase']
