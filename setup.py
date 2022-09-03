@@ -5,7 +5,7 @@ with open("README.md", "r", encoding='utf8') as f:
 
 setuptools.setup(
     name="pocketbase_pyclient",
-    version="0.0.7",
+    version="0.0.1",
     author="kirovj",
     author_email="j-wyt@qq.com",
     keywords=["pocketbase", "client"],
@@ -20,5 +20,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
-    install_requires=["requests"]
+    install_requires=["httpx"]
 )
