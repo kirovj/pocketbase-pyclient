@@ -3,16 +3,16 @@
 # @Author : Kirovj
 # @File : auth.py
 # @desc :
-
+from .crud import BaseService
 from .pocketbase import PocketBase
 
 
-class AuthService:
+class AuthService(BaseService):
     def __init__(self, pocketbase: PocketBase):
-        self.pocketbase = pocketbase
+        super().__init__(pocketbase)
 
     def auth_via_email(self, email: str, password: str):
-        response = self.pocketbase.http_client().post(url=f"{self.pocketbase.url}/api/users/auth-via-email",
-                                                      json={"email": email, "password": password})
+        response = self.client().http().post(url=f"{self.client().url}/api/users/auth-via-email",
+                                             json={"email": email, "password": password})
         if response.is_success:
-            self.pocketbase.auth_store.save(response.json()["token"])
+            self.client().auth_store.save(response.json()["token"])

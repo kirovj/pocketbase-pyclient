@@ -16,11 +16,11 @@ class PocketBase:
         self.api = None
         self.collection = None
         self.auth_store: AuthStore = AuthStore()
-        self._http_client = httpx.Client()
+        self._http = httpx.Client()
         self._auth_service = AuthService(self)
 
-    def http_client(self):
-        return self._http_client
+    def http(self):
+        return self._http
 
     def auth_via_email(self, email: str, password: str):
         """
@@ -39,7 +39,7 @@ class PocketBase:
         self.api = self.url + f"api/collections/{self.collection}/records"
 
     def list(self):
-        response = self._http_client.get(self.api, headers=self.auth_store.to_dict())
+        response = self._http.get(self.api, headers=self.auth_store.to_dict())
         return response.json()
 
     def list_items(self):
