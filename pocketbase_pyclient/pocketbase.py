@@ -12,7 +12,7 @@ class PocketBase:
         from .auth import AuthService
         from .models import AuthStore
 
-        self.url = url
+        self.url = url.strip('/')
         self.api = None
         self.collection = None
         self.auth_store: AuthStore = AuthStore()
@@ -36,7 +36,7 @@ class PocketBase:
         :param collection: collection you wang to connect
         """
         self.collection = collection
-        self.api = self.url + f"api/collections/{self.collection}/records"
+        self.api = self.url + f"/api/collections/{self.collection}/records"
 
     def list(self):
         response = self._http.get(self.api, headers=self.auth_store.to_dict())
