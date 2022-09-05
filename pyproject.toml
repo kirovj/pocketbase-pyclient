@@ -1,0 +1,19 @@
+[project]
+name = "pocketbase-pyclient"
+version = "0.0.1"
+description = "Python client for pocketbase"
+authors = [
+    {name = "kirovj", email = "j-wyt@qq.com"},
+]
+dependencies = [
+    "httpx>=0.23.0",
+]
+requires-python = ">=3.7"
+readme = "README.md"
+license = {text = "MIT"}
+
+[tool.pdm]
+
+[build-system]
+requires = ["pdm-pep517>=1.0.0"]
+build-backend = "pdm.pep517.api"
