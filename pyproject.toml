@@ -1,6 +1,6 @@
 [project]
 name = "pocketbase-pyclient"
-version = "0.0.1"
+version = "0.0.11"
 description = "Python client for pocketbase"
 authors = [
     {name = "kirovj", email = "j-wyt@qq.com"},
@@ -10,7 +10,11 @@ dependencies = [
 ]
 requires-python = ">=3.7"
 readme = "README.md"
+keywords = ["pocketbase", "client", "sdk"]
 license = {text = "MIT"}
+
+[project.urls]
+Repository = "https://github.com/kirovj/pocketbase-pyclient"
 
 [tool.pdm]
 
