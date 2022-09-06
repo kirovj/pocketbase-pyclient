@@ -1,12 +1,14 @@
 [project]
 name = "pocketbase-pyclient"
-version = "0.0.12"
+version = "0.0.13"
 description = "Python client for pocketbase"
 authors = [
     {name = "kirovj", email = "j-wyt@qq.com"},
 ]
 dependencies = [
     "httpx>=0.23.0",
+    "attrs>=22.1.0",
+    "cattrs>=22.1.0",
 ]
 requires-python = ">=3.7"
 readme = "README.md"

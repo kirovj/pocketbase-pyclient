@@ -17,3 +17,6 @@ class TestPocketBase:
 
     def test_list(self):
         assert self.pb.list()["page"] >= 1
+
+    def test_list_items(self):
+        assert len(self.pb.list_items()) >= 1
