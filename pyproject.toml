@@ -1,6 +1,6 @@
 [project]
 name = "pocketbase-pyclient"
-version = "0.0.12"
+version = "0.0.13"
 description = "Python client for pocketbase"
 authors = [
     {name = "kirovj", email = "j-wyt@qq.com"},
