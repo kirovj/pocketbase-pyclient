@@ -1,8 +1,7 @@
-# _*_ coding: utf-8 _*_
-# @Time : 2022/9/4 19:13
-# @Author : Kirovj
-# @File : crud.py
-# @desc :
+"""
+crud service
+"""
+
 from .pocketbase import PocketBase
 
 

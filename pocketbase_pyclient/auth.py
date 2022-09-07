@@ -1,8 +1,7 @@
-# _*_ coding: utf-8 _*_
-# @Time : 2022/9/4 2:50
-# @Author : Kirovj
-# @File : auth.py
-# @desc :
+"""
+auth service
+"""
+
 import cattrs
 
 from .crud import BaseService

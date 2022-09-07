@@ -1,8 +1,6 @@
-# _*_ coding: utf-8 _*_
-# @Time : 2022/9/3 2:46
-# @Author : Kirovj
-# @File : pocketbase.py
-# @desc : client for pocketbase
+"""
+PocketBase client
+"""
 
 import httpx
 

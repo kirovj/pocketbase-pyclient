@@ -1,8 +1,6 @@
-# _*_ coding: utf-8 _*_
-# @Time : 2022/9/4 2:58
-# @Author : Kirovj
-# @File : models.py
-# @desc :
+"""
+service models
+"""
 from attrs import define
 
 

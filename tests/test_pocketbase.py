@@ -1,8 +1,3 @@
-# _*_ coding: utf-8 _*_
-# @Time : 2022/9/4 4:03
-# @Author : Kirovj
-# @File : test_pocketbase.py
-# @desc :
 from pocketbase_pyclient import PocketBase
 
 
