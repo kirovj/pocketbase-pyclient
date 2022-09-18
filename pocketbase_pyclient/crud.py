@@ -24,11 +24,17 @@ class CrudService(BaseService):
     def __init__(self, pocketbase: PocketBase):
         super(CrudService, self).__init__(pocketbase)
 
-    def list(self):
-        return self.request(self.client().api).json()
+    def _api(self, collection: str):
+        return f"{self.client().url}/api/collections/{collection}/records"
 
-    def list_items(self):
-        return self.list()['items']
+    def list(self, collection: str):
+        return self.request(self._api(collection)).json()
 
-    def create(self, item):
-        return self.request(self.client().api, 'POST', json=item)
+    def list_items(self, collection: str):
+        return self.list(collection)['items']
+
+    def create(self, collection: str, item):
+        return self.request(self._api(collection), 'POST', json=item)
+
+    def update(self, collection: str, item):
+        pass
