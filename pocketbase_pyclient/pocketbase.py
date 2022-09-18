@@ -2,8 +2,6 @@
 PocketBase client
 """
 
-import httpx
-
 
 class PocketBase:
     def __init__(self, url: str):
@@ -14,12 +12,8 @@ class PocketBase:
         self.api = None
         self.collection = None
         self.auth_store: AuthStore = AuthStore()
-        self._http = httpx.Client()
         self._auth_service = AuthService(self)
         self._crud_service = CrudService(self)
-
-    def http(self):
-        return self._http
 
     def auth_via_email(self, email: str, password: str, admin: bool = False):
         """
@@ -37,14 +31,13 @@ class PocketBase:
         """
         self.collection = collection
         self.api = self.url + f"/api/collections/{self.collection}/records"
+        self._crud_service.api = self.api
 
     def list(self):
-        response = self._http.get(self.api, headers=self.auth_store.to_dict())
-        return response.json()
+        return self._crud_service.list()
 
     def list_items(self):
-        return self.list()["items"]
+        return self._crud_service.list_items()
 
-    # def create(self, item: dict):
-    #     r = requests.post(self._api, headers=self.header, json=item)
-    #     return r
+    def create(self, item: dict):
+        return self._crud_service.create(item)
