@@ -6,6 +6,15 @@ import httpx
 from .pocketbase import PocketBase
 
 
+def _make_params(page, per_page, _sort, _filter):
+    return {
+        'page': page,
+        'perPage': per_page,
+        'sort': _sort,
+        'filter': _filter
+    }
+
+
 class BaseService:
     def __init__(self, pocketbase: PocketBase):
         self._pocketbase = pocketbase
@@ -27,11 +36,8 @@ class CrudService(BaseService):
     def _api(self, collection: str):
         return f"{self.client().url}/api/collections/{collection}/records"
 
-    def list(self, collection: str):
-        return self.request(self._api(collection)).json()
-
-    def list_items(self, collection: str):
-        return self.list(collection)['items']
+    def list(self, collection: str, **kwargs):
+        return self.request(self._api(collection), params=_make_params(**kwargs)).json()
 
     def create(self, collection: str, item):
         return self.request(self._api(collection), 'POST', json=item)

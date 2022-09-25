@@ -22,11 +22,11 @@ class PocketBase:
         """
         self._auth_service.auth_via_email(email, password, admin)
 
-    def list(self, collection: str):
-        return self._crud_service.list(collection)
+    def list(self, collection: str, page: int = 1, per_page: int = 30, _sort: str = '', _filter: str = ''):
+        return self._crud_service.list(collection, page=page, per_page=per_page, _sort=_sort, _filter=_filter)
 
-    def list_items(self, collection: str):
-        return self._crud_service.list_items(collection)
+    def list_items(self, collection: str, page: int = 1, per_page: int = 30, _sort: str = '', _filter: str = ''):
+        return self.list(collection, page, per_page, _sort, _filter)['items']
 
     def create(self, collection: str, item: dict):
         return self._crud_service.create(collection, item)
