@@ -28,6 +28,9 @@ class PocketBase:
     def list_items(self, collection: str, page: int = 1, per_page: int = 30, _sort: str = '', _filter: str = ''):
         return self.list(collection, page, per_page, _sort, _filter)['items']
 
+    def view(self, collection: str, _id: str):
+        return self._crud_service.view(collection, _id)
+
     def create(self, collection: str, item: dict):
         return self._crud_service.create(collection, item)
 
