@@ -15,7 +15,7 @@ class TestPocketBase:
         assert len(self.pb.list_items("test")) >= 1
 
     def test_view(self):
-        assert self.pb.view('test', _id='cgbi69g623hn8rk')['name'] == 'jack'
+        assert self.pb.view("test", _id="cgbi69g623hn8rk")["name"] == "jack"
 
     def test_create(self):
         from random import randint
