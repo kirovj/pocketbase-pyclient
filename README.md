@@ -18,6 +18,8 @@ PocketBase is an open source Go backend, consisting of:
 It has only two official sdk [pocketbase/js-sdk](https://github.com/pocketbase/js-sdk) and [pocketbase/dart-sdk](https://github.com/pocketbase/dart-sdk)
 so pocketbase-pyclient is an easy way to interact with the API with Python.
 
+This project is still under development.
+
 ## Installation
 
 ```bash
@@ -31,8 +33,7 @@ from pocketbase_pyclient import PocketBase
 
 pb = PocketBase("http://127.0.0.1:8090")
 pb.auth_via_email("test@kirovj.com", "testpassword")
-pb.connect("collection")
-print(pb.list())
+print(pb.list("collection"))
 ```
 
 ## Credits
