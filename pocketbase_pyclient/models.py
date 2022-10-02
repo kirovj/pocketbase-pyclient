@@ -1,7 +1,6 @@
 """
 service models
 """
-from attrs import define
 
 
 class AuthStore:
@@ -23,7 +22,6 @@ class AuthStore:
         }
 
 
-@define
 class AdminModel:
     id: str = ""
     created: str = ""
@@ -33,13 +31,11 @@ class AdminModel:
     last_reset_sent_at: str = ""
 
 
-@define
 class AdminAuth:
     token: str = ""
     admin: AdminModel = None
 
 
-@define
 class UserModel:
     id: str = ""
     created: str = ""
@@ -52,7 +48,6 @@ class UserModel:
     # profile: {} = {}
 
 
-@define
 class UserAuth:
     token: str = ""
     user: UserModel = None

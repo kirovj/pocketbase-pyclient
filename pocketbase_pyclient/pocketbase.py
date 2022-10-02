@@ -8,10 +8,10 @@ class PocketBase:
         from .auth import AuthService
         from .models import AuthStore
         from .crud import CrudService
-        self.url = url.strip('/')
+        self.url = url.strip("/")
         self.auth_store: AuthStore = AuthStore()
-        self._auth_service = AuthService(self)
-        self._crud_service = CrudService(self)
+        self._auth = AuthService(self)
+        self.records = CrudService(self)
 
     def auth_via_email(self, email: str, password: str, admin: bool = False):
         """
@@ -20,19 +20,4 @@ class PocketBase:
         :param password: password for login
         :param admin: login in as admin or not, default false
         """
-        self._auth_service.auth_via_email(email, password, admin)
-
-    def list(self, collection: str, page: int = 1, per_page: int = 30, _sort: str = '', _filter: str = ''):
-        return self._crud_service.list(collection, page=page, per_page=per_page, _sort=_sort, _filter=_filter)
-
-    def list_items(self, collection: str, page: int = 1, per_page: int = 30, _sort: str = '', _filter: str = ''):
-        return self.list(collection, page, per_page, _sort, _filter)['items']
-
-    def view(self, collection: str, _id: str):
-        return self._crud_service.view(collection, _id)
-
-    def create(self, collection: str, item: dict):
-        return self._crud_service.create(collection, item)
-
-    def update(self, collection: str, item: dict):
-        return self._crud_service.update(collection, item)
+        self._auth.auth_via_email(email, password, admin)
