@@ -46,5 +46,5 @@ class CrudService(BaseService):
     def create(self, collection: str, item):
         return self.request(self._api(collection), "POST", json=item)
 
-    def update(self, collection: str, item):
-        pass
+    def update(self, collection: str, _id: str, item):
+        return self.request(f"{self._api(collection)}/{_id}", "PATCH", json=item)

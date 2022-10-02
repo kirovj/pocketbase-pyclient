@@ -34,5 +34,5 @@ class PocketBase:
     def create(self, collection: str, item: dict):
         return self._crud_service.create(collection, item)
 
-    def update(self, collection: str, item: dict):
-        return self._crud_service.update(collection, item)
+    def update(self, collection: str, _id: str, item: dict):
+        return self._crud_service.update(collection, _id, item)

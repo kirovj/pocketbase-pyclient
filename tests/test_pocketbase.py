@@ -32,3 +32,12 @@ class TestPocketBase:
         assert self.pb.create("test", item).is_success
         item["name"] = "kirovj"
         assert self.pb.create("test", item).status_code == 400
+
+    def test_update(self):
+        item = self.pb.list_items("test")[0]
+        item["age"] = 99
+        self.pb.update("test", item["id"], item)
+        item = self.pb.list_items("test")[0]
+        assert item["age"] == 99
+        item["age"] = 18
+        self.pb.update("test", item["id"], item)
