@@ -29,6 +29,10 @@ class BaseService:
     def request(self, url, method: str = "GET", params=None, json=None):
         return httpx.request(url=url, method=method, params=params, json=json, headers=self.auth_header())
 
+    async def _async_request(self, url, method: str = "GET", params=None, json=None):
+        return await self._pocketbase.httpx.request(url=url, method=method, params=params, json=json,
+                                                    headers=self.auth_header())
+
 
 class CrudService(BaseService):
     def __init__(self, pocketbase: PocketBase):
@@ -51,6 +55,9 @@ class CrudService(BaseService):
 
     def create(self, collection: str, item):
         return self.request(self._api(collection), "POST", json=item)
+
+    async def async_create(self, collection: str, item):
+        await self._async_request(self._api(collection), "POST", json=item)
 
     def update(self, collection: str, _id: str, item):
         return self.request(self._id_api(collection, _id), "PATCH", json=item)

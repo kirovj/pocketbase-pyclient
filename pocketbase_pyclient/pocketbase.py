@@ -1,6 +1,7 @@
 """
 PocketBase client
 """
+import httpx
 
 
 class PocketBase:
@@ -12,6 +13,7 @@ class PocketBase:
         self.auth_store: AuthStore = AuthStore()
         self._auth = AuthService(self)
         self.records = CrudService(self)
+        self.httpx = httpx.AsyncClient()
 
     def auth_via_email(self, email: str, password: str, admin: bool = False):
         """

@@ -46,3 +46,10 @@ class TestPocketBase:
         item = self.pb.records.list_items("test")[1]
         self.pb.records.delete("test", item["id"])
         assert self.pb.records.view("test", item["id"])["code"] == 404
+
+    def test_creates(self):
+        tasks = []
+        for i in range(100):
+            item = {"name": f"kirovj_{i}", "sexual": True, "grade": "one"}
+            task = self.pb.records.async_create("test", item)
+            tasks.append(task)
