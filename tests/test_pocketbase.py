@@ -41,3 +41,8 @@ class TestPocketBase:
         assert item["age"] == 99
         item["age"] = 18
         self.pb.records.update("test", item["id"], item)
+
+    def test_delete(self):
+        item = self.pb.records.list_items("test")[1]
+        self.pb.records.delete("test", item["id"])
+        assert self.pb.records.view("test", item["id"])["code"] == 404

@@ -37,6 +37,9 @@ class CrudService(BaseService):
     def _api(self, collection: str):
         return f"{self.url}/api/collections/{collection}/records"
 
+    def _id_api(self, collection: str, _id: str):
+        return f"{self._api(collection)}/{_id}"
+
     def list(self, collection: str, page: int = 1, per_page: int = 30, _sort: str = "", _filter: str = ""):
         return self.request(self._api(collection), params=_make_params(page, per_page, _sort, _filter)).json()
 
@@ -44,10 +47,13 @@ class CrudService(BaseService):
         return self.list(collection, page, per_page, _sort, _filter)["items"]
 
     def view(self, collection, _id: str):
-        return self.request(f"{self._api(collection)}/{_id}").json()
+        return self.request(self._id_api(collection, _id)).json()
 
     def create(self, collection: str, item):
         return self.request(self._api(collection), "POST", json=item)
 
     def update(self, collection: str, _id: str, item):
-        return self.request(f"{self._api(collection)}/{_id}", "PATCH", json=item)
+        return self.request(self._id_api(collection, _id), "PATCH", json=item)
+
+    def delete(self, collection: str, _id: str):
+        return self.request(self._id_api(collection, _id), "DELETE")
