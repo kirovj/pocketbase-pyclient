@@ -10,7 +10,7 @@ class PocketBase:
         from .crud import CrudService
         self.url = url.strip("/")
         self.auth_store: AuthStore = AuthStore()
-        self._auth_service = AuthService(self)
+        self._auth = AuthService(self)
         self.records = CrudService(self)
 
     def auth_via_email(self, email: str, password: str, admin: bool = False):
@@ -20,4 +20,4 @@ class PocketBase:
         :param password: password for login
         :param admin: login in as admin or not, default false
         """
-        self._auth_service.auth_via_email(email, password, admin)
+        self._auth.auth_via_email(email, password, admin)
