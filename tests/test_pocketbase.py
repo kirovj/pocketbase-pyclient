@@ -3,7 +3,15 @@ from pocketbase_pyclient import PocketBase
 
 class TestPocketBase:
     pb = PocketBase("http://127.0.0.1:8090/")
-    pb.auth_via_email("test@kirovj.com", "testpassword")
+    pb.auth_via_email("test@kirovj.com", "testpassword", admin=True)
+    pb.create("test", {
+        "name": "kirovj",
+        "age": 18,
+        "sexual": True,
+        "birthday": "2022-01-01",
+        "grade": "one",
+        "image": None,
+    })
 
     def test_auth_via_email(self):
         assert self.pb.auth_store.success()
@@ -15,9 +23,12 @@ class TestPocketBase:
         assert len(self.pb.list_items("test")) >= 1
 
     def test_view(self):
-        assert self.pb.view("test", _id="cgbi69g623hn8rk")["name"] == "jack"
+        item = self.pb.list_items("test")[0]
+        assert self.pb.view("test", _id=item["id"])["name"] == "kirovj"
 
     def test_create(self):
         from random import randint
-        assert self.pb.create("test", {"name": f"jack{randint(0, 1000)}", "age": 18}).is_success
-        assert self.pb.create("test", {"name": "jack", "age": 19}).status_code == 400
+        item = {"name": f"kirovj{randint(0, 1000)}", "sexual": True, "grade": "two"}
+        assert self.pb.create("test", item).is_success
+        item["name"] = "kirovj"
+        assert self.pb.create("test", item).status_code == 400
