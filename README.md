@@ -20,6 +20,9 @@ so pocketbase-pyclient is an easy way to interact with the API with Python.
 
 This project is still under development.
 
+## Development
+Import pb_schema.json to your Pocketbase.
+
 ## Installation
 
 ```bash
