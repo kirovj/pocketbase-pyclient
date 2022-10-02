@@ -37,8 +37,11 @@ class CrudService(BaseService):
     def _api(self, collection: str):
         return f"{self.url}/api/collections/{collection}/records"
 
-    def list(self, collection: str, **kwargs):
-        return self.request(self._api(collection), params=_make_params(**kwargs)).json()
+    def list(self, collection: str, page: int = 1, per_page: int = 30, _sort: str = "", _filter: str = ""):
+        return self.request(self._api(collection), params=_make_params(page, per_page, _sort, _filter)).json()
+
+    def list_items(self, collection: str, page: int = 1, per_page: int = 30, _sort: str = "", _filter: str = ""):
+        return self.list(collection, page, per_page, _sort, _filter)["items"]
 
     def view(self, collection, _id: str):
         return self.request(f"{self._api(collection)}/{_id}").json()
