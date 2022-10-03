@@ -1,8 +1,3 @@
-"""
-service models
-"""
-
-
 class AuthStore:
     def __init__(self):
         self._token = ""

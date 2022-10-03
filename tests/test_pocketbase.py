@@ -4,6 +4,7 @@ from pocketbase_pyclient import PocketBase
 class TestPocketBase:
     pb = PocketBase("http://127.0.0.1:8090/")
     pb.auth_via_email("test@kirovj.com", "testpassword", admin=True)
+    pb.disable_async_request()
     pb.records.create("test", {
         "name": "kirovj",
         "age": 18,
