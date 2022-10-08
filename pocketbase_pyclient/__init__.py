@@ -1,3 +1,3 @@
-from .pocketbase import PocketBase
+from .pocketbase import PocketBase, PocketBaseException
 
-__all__ = ['PocketBase']
+__all__ = ['PocketBase', 'PocketBaseException']

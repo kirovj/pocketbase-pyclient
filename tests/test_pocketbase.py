@@ -1,10 +1,13 @@
-from pocketbase_pyclient import PocketBase
+import asyncio
+
+import pytest
+
+from pocketbase_pyclient import PocketBase, PocketBaseException
 
 
 class TestPocketBase:
     pb = PocketBase("http://127.0.0.1:8090/")
     pb.auth_via_email("test@kirovj.com", "testpassword", admin=True)
-    pb.disable_async_request()
     pb.records.create("test", {
         "name": "kirovj",
         "age": 18,
@@ -30,9 +33,12 @@ class TestPocketBase:
     def test_create(self):
         from random import randint
         item = {"name": f"kirovj{randint(0, 1000)}", "sexual": True, "grade": "two"}
-        assert self.pb.records.create("test", item).is_success
-        item["name"] = "kirovj"
-        assert self.pb.records.create("test", item).status_code == 400
+        assert self.pb.records.create("test", item)["id"]
+
+    def test_create_fail(self):
+        with pytest.raises(PocketBaseException, match="Value must be unique."):
+            item = {"name": "kirovj", "sexual": True, "grade": "two"}
+            self.pb.records.create("test", item)
 
     def test_update(self):
         item = self.pb.records.list_items("test")[0]
@@ -44,13 +50,16 @@ class TestPocketBase:
         self.pb.records.update("test", item["id"], item)
 
     def test_delete(self):
-        item = self.pb.records.list_items("test")[1]
+        item = self.pb.records.list_items("test")[0]
         self.pb.records.delete("test", item["id"])
-        assert self.pb.records.view("test", item["id"])["code"] == 404
+        with pytest.raises(PocketBaseException, match="The requested resource wasn't found."):
+            _ = self.pb.records.view("test", item["id"])["code"]
 
     def test_creates(self):
         tasks = []
         for i in range(100):
             item = {"name": f"kirovj_{i}", "sexual": True, "grade": "one"}
-            task = self.pb.records.async_create("test", item)
+            print(item["name"])
+            task = asyncio.create_task(self.pb.records.async_create("test", item))
             tasks.append(task)
+        asyncio.gather(*tasks)

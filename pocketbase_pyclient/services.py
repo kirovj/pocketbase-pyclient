@@ -49,25 +49,37 @@ class CrudService(BaseService):
         return f"{self.path(collection)}/{_id}"
 
     def list(self, collection: str, page: int = 1, per_page: int = 30, _sort: str = "", _filter: str = ""):
-        return self.client.async_send(
+        return self.client.sync_send(
             self.path(collection),
             {"params": _make_params(page, per_page, _sort, _filter)}
         )
 
+    def list_items(self, collection: str, page: int = 1, per_page: int = 30, _sort: str = "", _filter: str = ""):
+        page = self.list(collection, page, per_page, _sort, _filter)
+        if page["items"]:
+            return page["items"]
+        return []
+
     def view(self, collection, _id: str):
-        return self.client.async_send(self.path_with_id(collection, _id))
+        return self.client.sync_send(self.path_with_id(collection, _id))
 
     def create(self, collection: str, item):
-        return self.client.async_send(
+        return self.client.sync_send(
+            self.path(collection),
+            {"method": "POST", "body": item}
+        )
+
+    async def async_create(self, collection: str, item):
+        return await self.client.async_send(
             self.path(collection),
             {"method": "POST", "body": item}
         )
 
     def update(self, collection: str, _id: str, item):
-        return self.client.async_send(
+        return self.client.sync_send(
             self.path_with_id(collection, _id),
             {"method": "PATCH", "body": item}
         )
 
     def delete(self, collection: str, _id: str):
-        return self.client.async_send(self.path_with_id(collection, _id), {"method": "DELETE"})
+        return self.client.sync_send(self.path_with_id(collection, _id), {"method": "DELETE"})
